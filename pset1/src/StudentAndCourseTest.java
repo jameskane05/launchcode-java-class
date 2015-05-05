@@ -8,6 +8,7 @@ import junit.framework.TestCase;
  * @author dshook
  *
  */
+
 public class StudentAndCourseTest extends TestCase {
 	@Test
 	public void testStudentInit() {
@@ -30,8 +31,42 @@ public class StudentAndCourseTest extends TestCase {
 		}
 	}
 
-    //More tests should go here
+    public void testStudents() {
+		Student me = new Student("James", "Kane", 222222, 91, 4.0);
+		Student you = new Student("Legacy", "Mother", 333333, 80, 3.0);
+		System.out.println(me.getName());  //testing getName
+		System.out.println(me.toString());  //testing toString
+		System.out.println(me.getClassStanding());  //testing getClassStanding
+		System.out.println(me.computeTuition());  //testing computeTuition
 
+		Student legacyStudent = me.createLegacy(you);  //testing createLegacy
+		System.out.println(legacyStudent.getName());
+	}
+
+	public void testCourse() {
+		String[] rosterTestArray = {"James Kane", "Jim Dangle", "Joe Blow", "Some Guy"};  // Sample array roster
+		Course bio = new Course("Biology 101", 4, 25, rosterTestArray);  // test Course constructor
+		System.out.println(bio.getCourseName());  //test getCourseName
+		System.out.println(bio.getCourseCredits());
+		System.out.println(bio.getCourseSeats());
+
+		for (int i = 0; i < rosterTestArray.length; i++) {
+			System.out.println(bio.getCourseRoster()[i]);
+		}
+
+		System.out.println(bio.toString());
+
+		Student me = new Student("New", "Guy", 222222, 91, 4.0);
+		boolean studentAdded = bio.addStudent(me);
+		System.out.println(studentAdded);  // check boolean value resulting from calling bio.addStudent
+		System.out.println(bio.getCourseSeats());  // check the number of seats after addStudent
+		System.out.println(bio.getCourseRoster()[3]);  // check the 4th position in the array
+
+		int rosterLen = bio.getCourseRoster().length;
+		for (int n = 0; n < rosterLen; n++) {
+			System.out.println(bio.printRoster()[n]);
+		}
+	}
 }
 
 
