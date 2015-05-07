@@ -14,7 +14,7 @@ public class MultChoice extends Question {
 
     // primary constructor function for subclass MultChoice
     public MultChoice(String choiceA, String choiceB, String choiceC) {
-        super("Which color do you like best?", choiceA);
+        super(MultChoice.getQuestion(), choiceA);
         this.choiceA = choiceA;
         this.choiceB = choiceB;
         this.choiceC = choiceC;
