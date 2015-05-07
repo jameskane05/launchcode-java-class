@@ -59,8 +59,8 @@ public class Student {
 		return legacyStudent;
 	}
 
-	public void submitGrade(int grade, int courseCredits) {
-		int qualScore = grade * courseCredits;
-		this.gpa = qualScore / this.credits;
+	public void submitGrade(int grade, int newCredits) {
+		int qualScore = grade * newCredits;
+		this.gpa = (this.gpa * this.credits) + (qualScore) / (this.credits + newCredits);
 	}
 }

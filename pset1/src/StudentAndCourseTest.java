@@ -44,28 +44,31 @@ public class StudentAndCourseTest extends TestCase {
 	}
 
 	public void testCourse() {
-		String[] rosterTestArray = {"James Kane", "Jim Dangle", "Joe Blow", "Some Guy"};  // Sample array roster
-		Course bio = new Course("Biology 101", 4, 25, rosterTestArray);  // test Course constructor
+		Student[] studentTestArray = new Student[25];
+		Course bio = new Course("Biology 101", 4, 25, studentTestArray);  // test Course constructor
 		System.out.println(bio.getCourseName());  //test getCourseName
 		System.out.println(bio.getCourseCredits());
 		System.out.println(bio.getCourseSeats());
-
-		for (int i = 0; i < rosterTestArray.length; i++) {
-			System.out.println(bio.getCourseRoster()[i]);
-		}
-
 		System.out.println(bio.toString());
 
+		// create a new student, attempt to add it to the bio
 		Student me = new Student("New", "Guy", 222222, 91, 4.0);
+		Student you = new Student("Jay", "Kay", 333333, 90, 3.0);
 		boolean studentAdded = bio.addStudent(me);
+		boolean studentAdded2 = bio.addStudent(you);
 		System.out.println(studentAdded);  // check boolean value resulting from calling bio.addStudent
-		System.out.println(bio.getCourseSeats());  // check the number of seats after addStudent
-		System.out.println(bio.getCourseRoster()[3]);  // check the 4th position in the array
+		System.out.println(studentAdded2);  // check boolean value resulting from calling bio.addStudent
 
+		System.out.println(bio.getCourseSeats());  // check the number of seats after addStudent
+
+		// iterate through course roster, printing each bame
 		int rosterLen = bio.getCourseRoster().length;
 		for (int n = 0; n < rosterLen; n++) {
 			System.out.println(bio.printRoster()[n]);
 		}
+
+		double avgGPA = bio.averageGPA();
+		System.out.println(avgGPA);
 	}
 }
 

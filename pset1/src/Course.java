@@ -5,46 +5,77 @@ public class Course {
     private String name;
     private int credits;
     private int seats;
-    private String[] roster;
+    private Student[] roster;
 
-    public Course(String name, int credits, int seats, String[] roster) {
+    public Course(String name, int credits, int seats, Student[] roster) {
         this.name = name;
         this.credits = credits;
         this.seats = seats;
         this.roster = roster;
     }
 
-    public String getCourseName() { return this.name; }
-    public int getCourseCredits() { return this.credits; }
-    public int getCourseSeats() { return this.seats; }
-    public String[] getCourseRoster() { return this.roster; }
+    public String getCourseName() {
+        return this.name;
+    }  //tested
 
-    public String toString() { return this.name + " - " + this.credits + " credits"; }
+    public int getCourseCredits() {
+        return this.credits;
+    }  //tested
 
+    public int getCourseSeats() {
+        return this.seats;
+    }  //tested
+
+    public Student[] getCourseRoster() {
+        return this.roster;
+    }  //tested
+
+    public String toString() {
+        return this.name + " - " + this.credits + " credits";
+    }  //tested
+
+    //tested
     public boolean addStudent(Student student) {
         int seats = getCourseSeats();
+        Student[] roster = getCourseRoster();
 
-        if (seats > 0) {
-            String[] roster = getCourseRoster();
-            String studentName = student.getName();
-            roster[roster.length - 1] = studentName;
-            this.seats = this.seats - 1;
-            return true;
+        for (int i = 0; i < seats; i++) {
+            if (roster[i] == null) {
+                roster[i] = student;
+                return true;
+            }
+            else if (roster[i] == student) {
+                return false;
+            }
         }
-
-        else return false;
+        return false;
     }
 
-    public String[] printRoster() {
+    //tested
+    public Student[] printRoster() {
         return getCourseRoster();
     }
 
     public double averageGPA() {
-        String[] roster = getCourseRoster();
-        int rosterLen = this.getCourseRoster().length;
+        // initializing necessary variables
+        double[] allGPAs = new double[25];
+        double totalGPA = 0;
+        double avgGPA = 0.0;
+        int seatsFilled = 0;
+        Student[] roster = getCourseRoster();
+        int rosterLen = roster.length;
 
-        for (int n = 0; n < rosterLen; n++) {
-            System.out.println(this.printRoster()[n]);
+        // iterating over the roster looking for students' names
+        for (int n = 0; roster[n] != null; n++) {
+                seatsFilled++;
+                allGPAs[n] = roster[n].getGPA();
         }
+
+        for (int x = 0; x < seatsFilled; x++)
+            totalGPA += allGPAs[x];
+
+        avgGPA = totalGPA / seatsFilled;
+
+        return avgGPA;
     }
 }
