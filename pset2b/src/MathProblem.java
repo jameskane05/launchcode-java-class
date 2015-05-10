@@ -5,12 +5,13 @@ public class MathProblem extends Question {
 
     private String equation;
 
-    public MathProblem(String equation) {
-        super("Solve for x: ", "3");
+    public MathProblem(String question, String equation, String answer) {
+        super(question, answer);
         this.equation = equation;
     }
 
-    public String getEquation() {
-        return this.equation;
-    }
+    public String getEquation() {return this.equation;}
+
+    public void setEquation(String equation) {this.equation = equation;}
+
 }
