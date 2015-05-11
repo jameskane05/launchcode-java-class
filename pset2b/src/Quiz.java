@@ -4,7 +4,7 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 
 /**
- * Created by jameskane on 5/7/15.
+ * Created by jameskane on 5/7/15. Please enjoy.
  */
 
 public class Quiz {
@@ -19,12 +19,12 @@ public class Quiz {
 
         // instantiate three question/answer pairs
         Question question1 = new Question("What is (fictional) real name of Iron Man?", "Tony Stark");
-        MultChoice question2 = new MultChoice("What is your favorite color?", "Blue", "Red", "Yellow", "Blue", "Red");
-        MathProblem question3 = new MathProblem("Solve for x", "x + 2 / 5 = 1", "3");
+        MultChoice question2 = new MultChoice("What is your favorite color?", "Blue", "Red", "Yellow", "Blue", "Red", "");
+        MathProblem question3 = new MathProblem("Solve for x:", "x + 2 / 5 = 1", "3");
 
         checkAnswer(question1.getAnswer(), displayQuestion(question1));
-        checkMultAnswer(question2, displayQuestion(question2));
-        checkAnswer(question3.getAnswer(), displayQuestion(question3));
+        checkMultAnswer(question2, displayMultChoice(question2));
+        checkAnswer(question3.getAnswer(), displayMathProblem(question3));
     }
 
     public static String displayQuestion(Question question) {
@@ -34,17 +34,20 @@ public class Quiz {
         return inputAnswer;
     }
 
-    public static String displayMultChoice (MultChoice multChoice) {
+    public static Object displayMultChoice (MultChoice multChoice) {
 
-        Icon icon;
+        ImageIcon icon = new ImageIcon("null");
+        String question = multChoice.getQuestion();
+        Object message = multChoice.getQuestion();
         Object[] choices = {multChoice.getChoiceA(), multChoice.getChoiceB(), multChoice.getChoiceC()};
-        String inputAnswer = JOptionPane.showInputDialog(
+        Object inputAnswer = JOptionPane.showInputDialog(
                 frame,
-                multChoice,
-                multChoice.getQuestion(),
+                message,
+                "Dumb Quiz",
                 JOptionPane.QUESTION_MESSAGE,
                 icon,
-                choices);
+                choices,
+                choices[0]);
         return inputAnswer;
     }
 
@@ -62,8 +65,9 @@ public class Quiz {
             JOptionPane.showMessageDialog(frame, "You're wrong! :(", "Dumb Quiz", JOptionPane.ERROR_MESSAGE);}
     }
 
-    public static void checkMultAnswer(MultChoice multChoice, String inputAnswer) {
-        if (multChoice.getAnswer().equals(inputAnswer) || multChoice.getAltAnswer().equals(inputAnswer) || multChoice.getAltAnswer2().equals(inputAnswer)) {
+    public static void checkMultAnswer(MultChoice multChoice, Object inputAnswer) {
+
+        if (multChoice.getAnswer().equals(inputAnswer.toString()) || multChoice.getAltAnswer().equals(inputAnswer) || multChoice.getAltAnswer2().equals(inputAnswer)) {
             JOptionPane.showMessageDialog(frame, "You're right! :)", "Dumb Quiz", JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(frame, "You're wrong! :(", "Dumb Quiz", JOptionPane.ERROR_MESSAGE);
